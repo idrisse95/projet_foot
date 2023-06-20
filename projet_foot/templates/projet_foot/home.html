@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+
+
+
+{% block content %}
+
+<h1>HOME</h1>
+
+<section>
+    <h3>ALL EQUIPE</h3>
+
+    <a href={% url 'addEquipe' %}>Creer une Equipe</a>
+
+    {% for el in allEquipe %}
+        
+    <p> {{el.name}} <button><a href={% url 'editEquipe' el.id %}>Edit</a></button> </p>
+
+
+    {% endfor %} 
+</section>
+
+
+
+..................................................
+
+
+<section>
+    <h3>ALL JOUEUR</h3>
+
+    <a href={% url 'addJoueur' %}>Creer un joueuer</a>
+
+    {% for el in allJoueur %}
+    <p> {{el.name}} <button><a href={% url 'editJoueur' el.id %}>Edit</a></button> <button><a href={% url 'detail' el.id %}>Details</a></button></p>
+
+    {% endfor %}
+
+</section>
+
+
+{% endblock content %}

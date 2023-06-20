@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+
+<div class=" d-flex">
+    <div class="">
+        <div>
+           
+           <table border=1>
+            <tr><td class="fw-bold">Nom:</td><td>{{joueur.name}}</td></tr>
+            <tr><td class="fw-bold">Prenom:</td><td>{{joueur.surname}}</td></tr>
+            <tr><td class="fw-bold">Equipes:</td><td>{{joueur.equipes}}</td></tr>
+           </table>
+           
+        </div>
+    </div>
+    
+   
+</div>
+
+{% endblock content %}
