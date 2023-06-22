@@ -1,7 +1,8 @@
 
-from django.shortcuts import render, redirect
-from .models import Equipe
-from .forms import EquipeForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import *
+from joueur.models import *
+from .forms import *
 
 # Create your views here.
 def addEquipe(request):
@@ -26,3 +27,9 @@ def editEquipes(request,id):
     else:
         form = EquipeForm(instance=edit)
     return render(request, 'projet_foot/equipes/editEquipes.html', {'form': form})
+
+def details_equipe(request, id):
+    equipe = get_object_or_404(Equipe, id=id)
+    joueurs = Joueur.objects.filter(equipe=equipe)
+    context = {'equipe': equipe, 'joueurs': joueurs}
+    return render(request, 'projet_foot/equipes/showEquipes.html', context)

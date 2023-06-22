@@ -8,8 +8,24 @@
            
            <table border=1>
             <tr><td class="fw-bold">Nom:</td><td>{{joueur.name}}</td></tr>
-            <tr><td class="fw-bold">Prenom:</td><td>{{joueur.surname}}</td></tr>
-            <tr><td class="fw-bold">Equipes:</td><td>{{joueur.equipes}}</td></tr>
+
+            <tr>
+                <td class="fw-bold">Prenom:</td><td>{{joueur.surname}}</td>
+            </tr>
+
+            <tr>
+                <td class="fw-bold">Equipes:</td><td>{{joueur.equipe}}</td>
+                
+            </tr> 
+
+            <tr>
+                <td><img src={{joueur.image}} alt=""></td>
+            </tr>
+
+            <tr>
+                <td><a class='fw-bold' href={% url 'editJoueur' joueur.id %}>Edit</a></td>
+            </tr>
+
            </table>
            
         </div>

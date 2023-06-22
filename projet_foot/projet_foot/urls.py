@@ -14,6 +14,16 @@ urlpatterns = [
     path('editJoueur/<int:id>', editJoueurs, name='editJoueur'),
     path('editEquipe/<int:id>', editEquipes, name='editEquipe'),
     path('show/<int:id>', details_joueur, name='detail'),
+    path('showEquipe/<int:id>', details_equipe, name='detailEquipe')
 
     
 ]
+
+# une section ( équipes remplies )
+# une section ( 2 équipes non remplies )
+# une section ( 4 joueurs sans équipes au hasard )
+# une section ( 4 joueurs avec équipe )
+# une section ( les equipes d'europes )
+# une section ( les équipes hors europes )
+# Une section 5 joueuses au hasard qui ont une équipe !
+# Une section 5 joueurs homme et qui ont une équipe !

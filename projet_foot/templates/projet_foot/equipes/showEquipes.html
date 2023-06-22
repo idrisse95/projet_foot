@@ -5,13 +5,21 @@
 <div class=" d-flex">
     <div class="">
         <div>
-            {% for x in Equipes%}
+       
            <table border=1>
-            <tr><td class="fw-bold">Nom:</td><td>{{x.nom}}</td><td><a class='fw-bold' href="modifEquipes">Edit</a></td></tr>
-            <tr><td class="fw-bold">Ville:</td><td>{{x.ville}}</td><td><a class='fw-bold' href="modifEquipes">Edit</a></td></tr>
-            <tr><td class="fw-bold">Joueurs:</td><td>{{x.joueurs}}</td><td><a class='fw-bold' href="modifEquipes">Edit</a></td></tr>
+            <tr><td class="fw-bold">Nom:</td><td>{{equipe.name}}</td></tr>
+            <tr><td class="fw-bold">Ville:</td><td>{{equipe.ville}}</td></tr>
+           
+            
+
            </table>
+
+            {% for x in joueurs %}
+                <p>{{x.name}}</p>
+                <p>{{x.surname}}</p>
+                <p>{{x.equipe}}</p>
             {% endfor %}
+            {{joueurs.count}}/13
         </div>
     </div>
     
