@@ -1,15 +1,14 @@
 from django import forms
 from .models import Joueur
+from .models import Equipe
 
 
 
 class JoueurForm(forms.ModelForm):
+    equipe = forms.ModelChoiceField(queryset=Equipe.objects.all(), required=False)
     class Meta:
         model = Joueur
         fields = '__all__'
-        null=True
-        blank=True
+      
 
-def init (self, args, kwargs):
-        super(JoueurForm, self).init(args, kwargs)
-        self.fields["equipe"].requierd = False
+

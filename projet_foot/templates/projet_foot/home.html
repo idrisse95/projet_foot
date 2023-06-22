@@ -9,24 +9,41 @@
 <h1>HOME</h1>
 
 <section>
-    <h3>ALL EQUIPE</h3>
-
-    <a  href={% url 'addEquipe' %}>Creer une Equipe</a>
+    <div class='titre_all_joueurs'>
+        <h3>ALL EQUIPE</h3>
+        <a  href={% url 'addEquipe' %}>Creer une Equipe</a>
+    </div>
 
     <div class='all'>
         {% for el in allEquipe %}
         
         <div>
             <div  class='titre_equipe'>
-                <p>
-                    {{el.name}}
+                <div class='flex_titre'>
+                    <div>
+                        {{el.name}}
+                    </div>
             
-                    <button><a href={% url 'editEquipe' el.id %}>Edit</a></button>
-            
-                    <button><a href={% url 'detailEquipe' el.id %}>Details</a></button>
-                </p>
+                    <div>
+
+                        <button><a href={% url 'editEquipe' el.id %}>Edit</a></button>
+                        <button><a href={% url 'detailEquipe' el.id %}>Details</a></button>
+                    </div>
+                    </div>
             </div>
             <div class='team'>
+                
+                {% for x in el.joueur_set.all %}
+                    <div>
+                        <button><a href={% url 'detail' x.id %}>
+                            <img class='img' src={{x.image}} width="70px" alt="">
+                        </a></button> 
+                       
+                        <p>{{x.name}}</p>
+                    </div>
+                        
+                        
+                    {% endfor %}
             </div>
         </div>
         {% endfor %}
@@ -35,52 +52,57 @@
 
 
 
-..................................................
 
 
-<section>
-    <h3>ALL JOUEUR</h3>
+<section class='all_joueur'>
+    <div class='titre_all_joueurs'>
+        <h3>ALL JOUEUR</h3>
+        <a href={% url 'addJoueur' %}>Creer un joueuer</a>
+    </div>
 
-    <a href={% url 'addJoueur' %}>Creer un joueuer</a>
-
-    {% for el in allJoueur %}
-    <p> {{el.name}} <button><a href={% url 'editJoueur' el.id %}>Edit</a></button> <button><a href={% url 'detail' el.id %}>Details</a></button> <button><a >Delete</a></button> </p>
-
-    {% endfor %}
+    <div class='contain_joueur'>
+        {% for el in allJoueur %}
+        <div class="joueur">
+            <p> {{el.name}} <button><a href={% url 'editJoueur' el.id %}>Edit</a></button> <button><a href={% url 'detail' el.id %}>Details</a></button>  </p>
+        </div>
+            {% endfor %}
+    </div>
 
 </section>
 
 
-..................................................
 
 
 
-<section>
+<section class="section_all">
 
-    <h3>ALL </h3>
+    <div class='titre_all_joueurs'>
+        <h3>ALL </h3>
+    </div>
 
     <div class=" d-flex">
-        <div class="">
-            <div>
+        <div >
+            <div class="allEquipe">
            
               {% for equipe in allEquipe %}
-              <table border=1>
-                <tr><td class="fw-bold">Nom:</td><td>{{equipe.name}}</td></tr>
-                <tr><td class="fw-bold">Ville:</td><td>{{equipe.ville}}</td></tr>
-               
-                
-    
-               </table>
-    
-                <div class='border-1 border border-primary'>
-                    {% for x in equipe.joueur_set.all %}
-                    <hr>
-                        <p>{{x.name}}</p>
-                        <p>{{x.surname}}</p>
-                        <p>{{x.role}}</p>
+              <div class="divAll">
+                  <div class="titre_table">
+                      <table >
+                        <tr ><td class="fw-bold">Nom:</td><td>{{equipe.name}}</td></tr>
+                        <tr><td class="fw-bold">Ville:</td><td>{{equipe.ville}}</td></tr>
+                       </table>
+                  </div>
+
+                    <div class='border-1 border border-primary'>
+                        {% for x in equipe.joueur_set.all %}
                         <hr>
-                    {% endfor %}
-                </div>
+                            <p>{{x.name}}</p>
+                            <p>{{x.surname}}</p>
+                            <p>{{x.role}}</p>
+                            <hr>
+                        {% endfor %}
+                    </div>
+              </div>
                
               {% endfor %}
             </div>
@@ -90,151 +112,171 @@
     </div>
 </section>
 
-..................................................
 
 
-
-<section>
-
-    <h3>EQUIPES NON COMPLETES </h3>
-
-    <div class="d-flex">
-        <div>
-            {% for equipe in enc %}
-            <table border="1">
-                <tr>
-                    <td class="fw-bold">Nom:</td>
-                    <td>{{equipe.name}}</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold">Ville:</td>
-                    <td>{{equipe.ville}}</td>
-                </tr>
-            </table>
+<div class='all_joueur oui'>
     
-            <table border="1">
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Équipe</th>
-                </tr>
-                {% for joueur in equipe.joueur_set.all|slice:":4" %}  <!-- Récupérer les quatre premiers joueurs -->
-                <tr>
-                    <td>{{joueur.name}}</td>
-                    <td>{{joueur.surname}}</td>
-                </tr>
-                {% endfor %}
-            </table>
+    <section>
     
-            {% empty %}
-            <p>Aucune équipe n'est disponible.</p>
-            {% endfor %}
+        <div class='titre_all_joueurs'>
+            <h3>EQUIPES NON COMPLETES </h3>
         </div>
-    </div>    
-
-</section>
-
-
-..................................................
-
-
-
-<section>
-    <h3>JOUEURS SANS EQUIPES</h3>
-
-    <div>
-        <table border="1">
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-            </tr>
-            {% for joueur in jse %}
-            <tr>
-                <td>{{ joueur.name }}</td>
-                <td>{{ joueur.surname }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
     
-</section>
-
-..................................................
-
-
-
-<section>
-    <h3>JOUEURS EQUIPES</h3>
-
-    <div>
-        <table border="1">
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-            </tr>
-            {% for joueur in je %}
-            <tr>
-                <td>{{ joueur.name }}</td>
-                <td>{{ joueur.surname }}</td>
-                <td>{{joueur.equipe}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    
-</section>
-
-
-..................................................
-
-
-
-<section>
-    <h3>EQUIPES EUROPE</h3>
-
-    <div>
-        <table border="1">
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-            </tr>
-            {% for equipe in ee %}
-            <tr>
-              
-                <td>{{equipe.name}}</td>
-                <td>{{equipe.ville}}</td>
-
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    
-</section>
-
-
-..................................................
-
-
-
-<section>
-    <h3>EQUIPES HORS EUROPE</h3>
-
-    <div>
-        <table border="1">
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-            </tr>
-            {% for equipe in ehe %}
-            <tr>
-                <td>{{ equipe.name }}</td>
-                <td>{{ equipe.ville }}</td>
+        <div class="d-flex">
+            <div class='allEquipe'>
+                {% for equipe in enc %}
+                <div class='divAll'>
+                    <div class='titre_table'>
+                        <table >
+                            <tr>
+                                <td class="fw-bold">Nom:</td>
+                                <td>{{equipe.name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Ville:</td>
+                                <td>{{equipe.ville}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <table >
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Équipe</th>
                         </tr>
-            {% endfor %}
-        </table>
-    </div>
+                        {% for joueur in equipe.joueur_set.all|slice:":4" %}  <!-- Récupérer les quatre premiers joueurs -->
+                        <tr>
+                            <td>{{joueur.name}}</td>
+                            <td>{{joueur.surname}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    {% empty %}
+                    <p>Aucune équipe n'est disponible.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     
-</section>
+    </section>
+    
+    
+    
+    
+    
+    <section>
+        <div class='titre_all_joueurs'>
+            <h3>JOUEURS SANS EQUIPES</h3>
+        </div>
+    
+        <div class='allEquipe'>
+            <div class=divAll>
+                <table >
+                    <tr class='titre_table'>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
+                    <div >
+                        {% for joueur in jse %}
+    
+                            <tr>
+                                <td>{{ joueur.name }}</td>
+                                <td>{{ joueur.surname }}</td>
+                            </tr>
+    
+                        {% endfor %}
+                    </div>
+                </table>
+            </div>
+        </div>
+    
+    </section>
+    
+    
+    
+    
+    <section>
+        <div class=titre_all_joueurs>
+            <h3>JOUEURS EQUIPES</h3>
+        </div>
+    
+        <div class=allEquipe>
+            <div class=divAll>
+                <table >
+                    <tr class=titre_table>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
+                    {% for joueur in je %}
+                    <tr>
+                        <td>{{ joueur.name }}</td>
+                        <td>{{ joueur.surname }}</td>
+                        <td>{{joueur.equipe}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    
+    </section>
+    
+    
+    
+    
+    
+    <section>
+        <div class=titre_all_joueurs>
+            <h3>EQUIPES EUROPE</h3>
+        </div>
+    
+        <div class=allEquipe>
+            <div class=divAll>
+                <table >
+                    <tr class=titre_table>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
+                    {% for equipe in ee %}
+                    <tr>
+    
+                        <td>{{equipe.name}}</td>
+                        <td>{{equipe.ville}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    
+    </section>
+    
+    
+    
+    
+    
+    <section>
+        <div class=titre_all_joueurs>
+            <h3>EQUIPES HORS EUROPE</h3>
+        </div>
+    
+        <div class=allEquipe>
+            <div class=divAll>
+                <table >
+                    <tr class=titre_table>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
+                    {% for equipe in ehe %}
+                    <tr>
+                        <td>{{ equipe.name }}</td>
+                        <td>{{ equipe.ville }}</td>
+                                </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    
+    </section>
+</div>
 
 
 {% endblock content %}

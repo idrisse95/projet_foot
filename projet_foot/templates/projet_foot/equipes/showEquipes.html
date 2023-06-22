@@ -14,12 +14,17 @@
 
            </table>
 
-            {% for x in joueurs %}
-                <p>{{x.name}}</p>
-                <p>{{x.surname}}</p>
-                <p>{{x.equipe}}</p>
-            {% endfor %}
-            {{joueurs.count}}/13
+            <div class=contain_joueur>
+                {% for x in joueurs %}
+                
+                    <div class=joueur>
+                        <p>{{x.name}}</p>
+                        <p>{{x.surname}}</p>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+            <p class=number>{{joueurs.count}}/13</p>
         </div>
     </div>
     
